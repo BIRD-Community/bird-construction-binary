@@ -12,4 +12,6 @@ module.instanceClassIds = {
 	WeldConstraint = 1,
 }
 
+module.magicString = "BirdConstructionBinary"
+
 return module

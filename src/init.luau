@@ -30,7 +30,7 @@ function module.initDictionary()
 	return dictionaries
 end
 
-module.magicString = "BirdConstructionBinary"
+
 
 --- rootInstance itself is not serialized
 function module.serialize(rootInstance)
@@ -88,7 +88,7 @@ function module.serialize(rootInstance)
 	-- create buffer
 	local instanceBuffer = GrowBuffer.new()
 	-- write header
-	instanceBuffer:writestring(module.magicString) -- magic
+	instanceBuffer:writestring(constants.magicString) -- magic
 	instanceBuffer:writeu8(2) -- version
 	instanceBuffer:writeu32(applicableInstanceCount) -- instance count
 	local function writeValue(value, valueConfig)
