@@ -1,0 +1,9 @@
+{
+  "name": "bird-construction-binary",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "$path": "src"
+    }
+  }
+}
