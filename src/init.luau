@@ -15,7 +15,7 @@ function getInstanceModule(className)
 	end
 	local instanceModule = require(script.Instances:FindFirstChild(className))
 	if instanceModule == module then
-		instanceModule = require(script.Object)
+		instanceModule = require(`./${className}`)
 	end
 	return instanceModule
 end
