@@ -6,7 +6,7 @@ function module.new(initialCapacity)
 	local buff = buffer.create(capacity)
 	local used = 0
 	local read = 0
-	return setmetatable({ -- sings like Sigmund
+	return setmetatable({
 		buffer = buff,
 		capacity = capacity,
 		used = used,
