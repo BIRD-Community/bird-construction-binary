@@ -1,4 +1,4 @@
-local module = {}
+local birdConstructionBinary = {}
 local constants = require(script.Constants)
 local GrowBuffer = require(script.GrowBuffer)
 local types = script.Types
@@ -14,13 +14,13 @@ function getInstanceModule(className)
 		return false
 	end
 	local instanceModule = require(script.Instances:FindFirstChild(className))
-	if instanceModule == module then
+	if instanceModule == birdConstructionBinary then
 		instanceModule = require(`./${className}`)
 	end
 	return instanceModule
 end
 
-function module.initDictionary()
+function birdConstructionBinary.initDictionary()
 	local dictionaries = {}
 	for _, valueType in pairs(script.Types:GetChildren()) do
 		if valueType:IsA("ModuleScript") then
@@ -33,9 +33,9 @@ end
 
 
 --- rootInstance itself is not serialized
-function module.serialize(rootInstance)
+function birdConstructionBinary.serialize(rootInstance)
 	local context = {
-		dictionaries = module.initDictionary(),
+		dictionaries = birdConstructionBinary.initDictionary(),
 		instanceReferences = {}, -- instance: reference
 		backDictionary = {},
 		dictionaryWritePositions = {},
@@ -145,9 +145,9 @@ function module.serialize(rootInstance)
 	return instanceBuffer:toBuffer()
 end
 
-function module.deserialize(data: buffer, asModel: boolean)
+function birdConstructionBinary.deserialize(data: buffer, asModel: boolean)
 	local context = {
-		dictionaries = module.initDictionary(),
+		dictionaries = birdConstructionBinary.initDictionary(),
 		backDictionary = {},
 		dictionaryWritePositions = {},
 		instanceReferences = {},
@@ -167,8 +167,8 @@ function module.deserialize(data: buffer, asModel: boolean)
 	-- load buffer
 	local instanceBuffer = GrowBuffer.new()
 	instanceBuffer:writebuffer(data)
-	local magic = instanceBuffer:readstring(string.len(module.magicString))
-	assert(magic == module.magicString, "invalid magic")
+	local magic = instanceBuffer:readstring(string.len(constants.magicString))
+	assert(magic == constants.magicString, "invalid magic")
 	local version = instanceBuffer:readu8()
 	local instanceCount = instanceBuffer:readu32()
 	local function getOrWriteDictionaryValue(valueType: string, value)
@@ -267,4 +267,4 @@ function module.deserialize(data: buffer, asModel: boolean)
 	return model or deserializedInstances
 end
 
-return module
+return birdConstructionBinary

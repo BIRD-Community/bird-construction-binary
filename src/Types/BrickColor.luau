@@ -1,19 +1,19 @@
-local module = {}
+local brickColorData = {}
 
-module.length = 2
+brickColorData.length = 2
 
-function module.serialize(value: BrickColor)
-	local buff = buffer.create(module.length)
+function brickColorData.serialize(value: BrickColor)
+	local buff = buffer.create(brickColorData.length)
 	buffer.writeu16(buff, 0, value.Number)
 	return buff
 end
 
-function module.deserialize(buff: buffer)
+function brickColorData.deserialize(buff: buffer)
 	local number = buffer.readu16(buff, 0)
 	return BrickColor.new(number)
 end
 
-function module.initDictionary()
+function brickColorData.initDictionary()
 	local dictionary = {}
 	for i = 1, 255 do
 		local success, brickColor = pcall(function()
@@ -28,4 +28,4 @@ function module.initDictionary()
 	return dictionary
 end
 
-return module
+return brickColorData

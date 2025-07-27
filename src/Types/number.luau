@@ -1,18 +1,18 @@
-local module = {}
+local numberData = {}
 
-module.length = 4
+numberData.length = 4
 
-function module.serialize(value: number)
-	local buff = buffer.create(module.length)
+function numberData.serialize(value: number)
+	local buff = buffer.create(numberData.length)
 	buffer.writef32(buff, 0, value)
 	return buff
 end
 
-function module.deserialize(buff: number)
+function numberData.deserialize(buff: number)
 	return buffer.readf32(buff, 0)
 end
 
-function module.initDictionary()
+function numberData.initDictionary()
 	local dictionary = {}
 	dictionary[1] = 0
 	dictionary[2] = 1
@@ -25,4 +25,4 @@ function module.initDictionary()
 	return dictionary
 end
 
-return module
+return numberData

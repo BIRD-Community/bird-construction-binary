@@ -1,8 +1,8 @@
-local module = {}
+local stringData = {}
 
-module.length = "variable"
+stringData.length = "variable"
 
-function module.serialize(value: string)
+function stringData.serialize(value: string)
 	local length = #value
 	local buff = buffer.create(length + 2)
 	buffer.writeu16(buff, 0, length)
@@ -10,12 +10,12 @@ function module.serialize(value: string)
 	return buff
 end
 
-function module.deserialize(buff: buffer)
+function stringData.deserialize(buff: buffer)
 	local length = buffer.readu16(buff, 0)
 	return buffer.readstring(buff, 2, length)
 end
 
-function module.initDictionary()
+function stringData.initDictionary()
 	local dictionary = {}
 	dictionary[1] = "Brick"
 	dictionary[2] = "WedgePart"
@@ -56,4 +56,4 @@ function module.initDictionary()
 	return dictionary
 end
 
-return module
+return stringData

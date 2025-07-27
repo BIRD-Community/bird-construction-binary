@@ -1,9 +1,9 @@
-local module = {}
+local cframeData = {}
 
-module.length = 12 * 4
+cframeData.length = 12 * 4
 
-function module.serialize(value: CFrame)
-	local buff = buffer.create(module.length)
+function cframeData.serialize(value: CFrame)
+	local buff = buffer.create(cframeData.length)
 	local t = {value:GetComponents()}
 	for i = 1, #t do
 		buffer.writef32(buff, (i - 1) * 4, t[i])
@@ -11,7 +11,7 @@ function module.serialize(value: CFrame)
 	return buff
 end
 
-function module.deserialize(buff: buffer)
+function cframeData.deserialize(buff: buffer)
 	local t = {}
 	for i = 1, 12 do
 		table.insert(t, buffer.readf32(buff, (i - 1) * 4))
@@ -19,7 +19,7 @@ function module.deserialize(buff: buffer)
 	return CFrame.new(unpack(t))
 end
 
-function module.initDictionary()
+function cframeData.initDictionary()
 	local dictionary = {}
 	for i = 1, 255 do
 		local cf
@@ -33,4 +33,4 @@ function module.initDictionary()
 	return dictionary
 end
 
-return module
+return cframeData
