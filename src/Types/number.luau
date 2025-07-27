@@ -8,7 +8,7 @@ function numberData.serialize(value: number)
 	return buff
 end
 
-function numberData.deserialize(buff: number)
+function numberData.deserialize(buff: buffer)
 	return buffer.readf32(buff, 0)
 end
 
