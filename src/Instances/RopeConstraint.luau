@@ -4,7 +4,7 @@ module.values = {
 	["Name"] = {
 		valueType = "string",
 		defaultValue = "RopeConstraint",
-		serializer = require(script.Parent.Parent.Types.string),
+		serializer = require("../Types/string"),
 	},
 	["Attachment0"] = {
 		valueType = "Reference",
@@ -19,22 +19,22 @@ module.values = {
 	["Length"] = {
 		valueType = "number",
 		defaultValue = 5,
-		serializer = require(script.Parent.Parent.Types.number),
+		serializer = require("../Types/number"),
 	},
 	["Restitution"] = {
 		valueType = "number",
 		defaultValue = 0,
-		serializer = require(script.Parent.Parent.Types.number),
+		serializer = require("../Types/number"),
 	},
 	["Thickness"] = {
 		valueType = "number",
 		defaultValue = 0.1,
-		serializer = require(script.Parent.Parent.Types.number),
+		serializer = require("../Types/number"),
 	},
 	["Color"] = {
 		valueType = "BrickColor",
 		defaultValue = BrickColor.new("Earth orange"),
-		serializer = require(script.Parent.Parent.Types.BrickColor),
+		serializer = require("../Types/BrickColor"),
 	},
 }
 

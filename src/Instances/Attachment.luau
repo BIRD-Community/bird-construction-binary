@@ -4,7 +4,7 @@ module.values = {
 	["Name"] = {
 		valueType = "string",
 		defaultValue = "RopeConstraint",
-		serializer = require(script.Parent.Parent.Types.string),
+		serializer = require("../Types/string"),
 	},
 	["Parent"] = {
 		valueType = "Reference",
@@ -14,7 +14,7 @@ module.values = {
 	["CFrame"] = {
 		valueType = "CFrame",
 		defaultValue = CFrame.new(),
-		serializer = require(script.Parent.Parent.Types.CFrame),
+		serializer = require("../Types/CFrame"),
 	},
 }
 
