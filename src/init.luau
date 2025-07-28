@@ -2,6 +2,7 @@ local birdConstructionBinary = {}
 local constants = require(script.Constants)
 local GrowBuffer = require(script.GrowBuffer)
 local types = script.Types
+birdConstructionBinary.types = types
 local stringValue = require(types.string)
 local stringValueConfig = {
 	valueType = "string",
