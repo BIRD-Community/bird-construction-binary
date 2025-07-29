@@ -21,7 +21,6 @@ function numberData.initDictionary()
 	for i = 4, 255 do
 		dictionary[i] = i - 2
 	end
-	print(dictionary)
 	return dictionary
 end
 
