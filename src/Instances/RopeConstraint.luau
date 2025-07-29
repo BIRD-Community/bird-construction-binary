@@ -17,19 +17,19 @@ module.values = {
 		serializer = nil,
 	},
 	["Length"] = {
-		valueType = "number",
+		valueType = "numberf32",
 		defaultValue = 5,
-		serializer = require("../Types/number"),
+		serializer = require("../Types/numberf32"),
 	},
 	["Restitution"] = {
-		valueType = "number",
+		valueType = "numberf32",
 		defaultValue = 0,
-		serializer = require("../Types/number"),
+		serializer = require("../Types/numberf32"),
 	},
 	["Thickness"] = {
-		valueType = "number",
+		valueType = "numberf32",
 		defaultValue = 0.1,
-		serializer = require("../Types/number"),
+		serializer = require("../Types/numberf32"),
 	},
 	["Color"] = {
 		valueType = "BrickColor",

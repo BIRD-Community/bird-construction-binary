@@ -22,9 +22,9 @@ module.values = {
 		serializer = require("../Types/Color3"),
 	},
 	["Transparency"] = {
-		valueType = "number",
+		valueType = "numberf32",
 		defaultValue = 0,
-		serializer = require("../Types/number"),
+		serializer = require("../Types/numberf32"),
 	},
 	["Material"] = {
 		valueType = "Material",
