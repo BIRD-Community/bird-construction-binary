@@ -173,11 +173,6 @@ function birdConstructionBinary.deserialize(data: buffer, asModel: boolean)
 	local version = instanceBuffer:readu8()
 	local instanceCount = instanceBuffer:readu32()
 	local function getOrWriteDictionaryValue(valueType: string, value)
-		---- check if value exists in dictionary
-		--local cachedIndex = context.backDictionary[valueType][value]
-		--if cachedIndex then
-		--	return cachedIndex, false
-		--end
 		-- miss. write value to dictionaries
 		local index = context.dictionaryWritePositions[valueType]
 		local previousDictionaryValue = context.dictionaries[valueType][index]
@@ -214,8 +209,6 @@ function birdConstructionBinary.deserialize(data: buffer, asModel: boolean)
 				local sectionBuffer = instanceBuffer:readbuffer(assumedLength)
 				local deserializedValue = valueConfig.serializer.deserialize(sectionBuffer)
 				getOrWriteDictionaryValue(valueConfig.valueType, deserializedValue)
-				--context.backDictionary[valueConfig.valueType][deserializedValue] = newDictionaryIndex
-				--context.dictionaries[valueConfig.valueType][newDictionaryIndex] = deserializedValue
 				return deserializedValue
 			else
 				local value = context.dictionaries[valueConfig.valueType][dictionaryIndex]
