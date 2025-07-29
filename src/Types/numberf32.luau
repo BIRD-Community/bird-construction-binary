@@ -24,4 +24,6 @@ function numberData.initDictionary()
 	return dictionary
 end
 
+numberData.name = script.Name
+
 return numberData

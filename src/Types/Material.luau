@@ -17,4 +17,6 @@ function materialData.initDictionary()
 	return {}
 end
 
+materialData.name = script.Name
+
 return materialData

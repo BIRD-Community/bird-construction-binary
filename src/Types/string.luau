@@ -56,4 +56,6 @@ function stringData.initDictionary()
 	return dictionary
 end
 
+stringData.name = script.Name
+
 return stringData

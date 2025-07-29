@@ -33,4 +33,6 @@ function cframeData.initDictionary()
 	return dictionary
 end
 
+cframeData.name = script.Name
+
 return cframeData

@@ -25,4 +25,6 @@ function color3Data.initDictionary()
 	return dictionary
 end
 
+color3Data.name = script.Name
+
 return color3Data

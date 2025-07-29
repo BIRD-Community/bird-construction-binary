@@ -24,4 +24,6 @@ function numberf64Data.initDictionary()
 	return dictionary
 end
 
+numberf64Data.name = script.Name
+
 return numberf64Data

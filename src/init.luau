@@ -34,7 +34,10 @@ end
 
 
 --- rootInstance itself is not serialized
-function birdConstructionBinary.serialize(rootInstance)
+function birdConstructionBinary.serialize(rootInstance, options)
+	options = options or {}
+	local attributes = options.attributes or {}
+	local serializeAttributes = #attributes > 0
 	local context = {
 		dictionaries = birdConstructionBinary.initDictionary(),
 		instanceReferences = {}, -- instance: reference
@@ -134,6 +137,16 @@ function birdConstructionBinary.serialize(rootInstance)
 				applicablePropertyCount += 1
 			end
 		end
+		if serializeAttributes then
+			for attributeName, attributeValue in pairs(instance:GetAttributes()) do
+				for index, attributeConfig in pairs(attributes) do
+					if attributeName == attributeConfig.name then
+						applicablePropertyCount += 1
+						break
+					end
+				end
+			end
+		end
 		instanceBuffer:writeu16(applicablePropertyCount)
 		-- write properties
 		for name, valueConfig in pairs(instanceModule.values) do
@@ -142,11 +155,25 @@ function birdConstructionBinary.serialize(rootInstance)
 				writeInstanceProperty(instance, name, value, valueConfig)
 			end
 		end
+		-- write attributes
+		if serializeAttributes then
+			for index, attributeConfig in pairs(attributes) do
+				local value = instance:GetAttribute(attributeConfig.name)
+				if value ~= nil then
+					writeInstanceProperty(instance, `${attributeConfig.name}`, value, {
+						valueType = attributeConfig.type.name,
+						serializer = attributeConfig.type
+					})
+				end
+			end
+		end
 	end
 	return instanceBuffer:toBuffer()
 end
 
-function birdConstructionBinary.deserialize(data: buffer, asModel: boolean)
+function birdConstructionBinary.deserialize(data: buffer, asModel: boolean, options)
+	options = options or {}
+	local attributes = options.attributes or {} -- ["AttributeName"] = type
 	local context = {
 		dictionaries = birdConstructionBinary.initDictionary(),
 		backDictionary = {},
@@ -227,13 +254,27 @@ function birdConstructionBinary.deserialize(data: buffer, asModel: boolean)
 		assert(instanceModule, `Module for {className} not found.`)
 		for propertyIndex = 1, propertyCount do
 			local propertyName = readValue(stringValueConfig)
-			local valueConfig = instanceModule.values[propertyName]
-			local propertyValue = readValue(valueConfig)
-			if valueConfig.valueType == "Reference" then
-				pendingReferenceInstanceProperties[index] = pendingReferenceInstanceProperties[index] or {}
-				pendingReferenceInstanceProperties[index][propertyName] = propertyValue
+			-- starts wizh $ (Attribute)
+			if string.sub(propertyName, 1, 1) == "$" then
+				local attributeName = string.sub(propertyName, 2)
+				local attributeConfig = attributes[attributeName]
+				if not attributeConfig then
+					warn(`Found {propertyName} attribute but it's missing in deserialization options.`)
+				else
+					instance:SetAttribute(attributeName, readValue({
+						valueType = attributeConfig.name,
+						serializer = attributeConfig,
+					}))
+				end
 			else
-				instance[propertyName] = propertyValue
+				local valueConfig = instanceModule.values[propertyName]
+				local propertyValue = readValue(valueConfig)
+				if valueConfig.valueType == "Reference" then
+					pendingReferenceInstanceProperties[index] = pendingReferenceInstanceProperties[index] or {}
+					pendingReferenceInstanceProperties[index][propertyName] = propertyValue
+				else
+					instance[propertyName] = propertyValue
+				end
 			end
 		end
 		table.insert(deserializedInstances, instance)

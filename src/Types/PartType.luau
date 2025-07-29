@@ -17,4 +17,6 @@ function partTypeData.initDictionary()
 	return {}
 end
 
+partTypeData.name = script.Name
+
 return partTypeData

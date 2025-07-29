@@ -30,4 +30,6 @@ function vector3Data.initDictionary()
 	return dictionary
 end
 
+vector3Data.name = script.Name
+
 return vector3Data

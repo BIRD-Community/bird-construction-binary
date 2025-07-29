@@ -28,4 +28,6 @@ function brickColorData.initDictionary()
 	return dictionary
 end
 
+brickColorData.name = script.Name
+
 return brickColorData
