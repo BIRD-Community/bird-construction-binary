@@ -3,7 +3,7 @@ local module = {}
 module.values = {
 	["Name"] = {
 		valueType = "string",
-		defaultValue = "RopeConstraint",
+		defaultValue = "Attachment",
 		serializer = require("../Types/string"),
 	},
 	["Parent"] = {
