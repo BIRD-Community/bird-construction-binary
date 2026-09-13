@@ -1,0 +1,41 @@
+local module = {}
+
+module.values = {
+	["Name"] = {
+		valueType = "string",
+		defaultValue = "Part",
+		serializer = require("../Types/string"),
+	},
+	["CFrame"] = {
+		valueType = "CFrame",
+		defaultValue = CFrame.new(),
+		serializer = require("../Types/CFrame"),
+	},
+	["Size"] = {
+		valueType = "Vector3",
+		defaultValue = Vector3.new(4,1.2,2),
+		serializer = require("../Types/Vector3"),
+	},
+	["Color"] = {
+		valueType = "Color3",
+		defaultValue = Color3.fromRGB(163,162,165),
+		serializer = require("../Types/Color3"),
+	},
+	["CanCollide"] = {
+		valueType = "boolean",
+		defaultValue = true,
+		serializer = require("../Types/boolean"),
+	},
+	["Transparency"] = {
+		valueType = "numberf32",
+		defaultValue = 0,
+		serializer = require("../Types/numberf32"),
+	},
+	["Material"] = {
+		valueType = "Material",
+		defaultValue = Enum.Material.Plastic,
+		serializer = require("../Types/Material"),
+	},
+}
+
+return module
