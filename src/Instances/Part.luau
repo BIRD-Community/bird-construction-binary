@@ -21,6 +21,11 @@ module.values = {
 		defaultValue = Color3.fromRGB(163,162,165),
 		serializer = require("../Types/Color3"),
 	},
+	["CanCollide"] = {
+		valueType = "boolean",
+		defaultValue = true,
+		serializer = require("../Types/boolean"),
+	},
 	["Transparency"] = {
 		valueType = "numberf32",
 		defaultValue = 0,
